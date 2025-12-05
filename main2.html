@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jorge Calquín - Soluciones Informáticas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --blue-600: #2563eb;
+      --blue-500: #3b82f6;
+      --blue-400: #60a5fa;
+      --cyan-500: #06b6d4;
+      --cyan-400: #22d3ee;
+      --green-600: #16a34a;
+      --green-500: #22c55e;
+      --green-400: #4ade80;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+      background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+      color: var(--white);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(17, 24, 39, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+      z-index: 50;
+    }
+
+    .nav-content {
+      max-width: 7xl;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .logo-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--blue-600);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      background: linear-gradient(to right, var(--blue-400), var(--cyan-400));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--blue-400);
+    }
+
+    .cta-button {
+      background: var(--green-500);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cta-button:hover {
+      background: var(--green-600);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 152px;
+      padding-bottom: 5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .hero-content {
+      max-width: 7xl;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(to right, var(--blue-400), var(--cyan-300));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray-300);
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+      background: linear-gradient(to right, var(--blue-600), var(--cyan-500));
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .primary-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .secondary-btn {
+      border: 2px solid var(--gray-600);
+      color: var(--white);
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: border-color 0.3s;
+    }
+
+    .secondary-btn:hover {
+      border-color: var(--blue-400);
+    }
+
+    /* Card Styles */
+    .card {
+      background: rgba(17, 24, 39, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(55, 65, 81, 0.3);
+      border-radius: 1rem;
+      padding: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .card:hover {
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .card-icon {
+      color: var(--blue-400);
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .card-text {
+      color: var(--gray-300);
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gray-400);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-icon {
+      color: var(--green-400);
+    }
+
+    /* Section Layout */
+    .section {
+      padding: 5rem 1rem;
+    }
+
+    .section-bg {
+      background: rgba(31, 41, 55, 0.3);
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray-300);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 7xl;
+      margin: 0 auto;
+    }
+
+    .grid-1 {
+      display: grid;
+      gap: 2rem;
+      max-width: 7xl;
+      margin: 0 auto;
+    }
+
+    /* Project Card */
+    .project-card {
+      background: rgba(17, 24, 39, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(55, 65, 81, 0.3);
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .project-client {
+      color: var(--blue-400);
+      font-weight: 600;
+    }
+
+    .project-result {
+      background: rgba(17, 24, 39, 0.5);
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin-top: 1.5rem;
+      color: var(--green-400);
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      color: var(--gray-300);
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: var(--gray-800);
+      border: 1px solid var(--gray-700);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      color: var(--white);
+      font-family: inherit;
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--blue-500);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(to right, var(--blue-600), var(--cyan-500));
+      color: white;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border: none;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .success-message {
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .success-icon {
+      font-size: 3rem;
+      color: var(--green-400);
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid rgba(55, 65, 81, 0.5);
+      padding: 2rem 1rem;
+    }
+
+    .footer-content {
+      max-width: 7xl;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .footer-text {
+      color: var(--gray-400);
+      font-size: 0.875rem;
+      text-align: center;
+    }
+
+    .footer-contact {
+      color: var(--green-400);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .footer-contact:hover {
+      color: var(--green-300);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links, .desktop-menu {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+        background: rgba(17, 24, 39, 0.95);
+        padding: 1rem;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        z-index: 40;
+      }
+
+      .mobile-menu a {
+        display: block;
+        padding: 0.75rem 0;
+        color: white;
+        text-decoration: none;
+      }
+
+      .mobile-menu a:hover {
+        color: var(--blue-400);
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero-title {
+        font-size: 2.25rem;
+      }
+
+      .section {
+        padding: 3rem 1rem;
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo">
+        <div class="logo-icon">
+            <div class="logo-icon">
+                <img src="Logo_AB.png" alt="Logo AB" style="width: 2.5rem; height: 2.5rem; border-radius: 50%; object-fit: cover;">
+              </div>          
+        </div>
+        <span class="logo-text">A&B Proveedores - Servicios Integrales SpA</span>
+      </div>
+      
+      <div class="desktop-menu">
+        <div class="nav-links">
+          <a href="#inicio" class="nav-link">Inicio</a>
+          <a href="#servicios" class="nav-link">Servicios</a>
+          <a href="#proyectos" class="nav-link">Proyectos</a>
+          <a href="#sobre-mi" class="nav-link">Sobre mí</a>
+          <a href="#contacto" class="nav-link">Contacto</a>
+          <a href="#planes" class="nav-link">Planes</a>
+          <a href="https://wa.me/56986747101" target="_blank" class="cta-button">
+            <i class="fab fa-whatsapp"></i>
+            <span>Escribenos</span>
+          </a>
+        </div>
+      </div>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    
+    <div class="mobile-menu hidden" id="mobileMenu">
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#planes">Planes</a>
+      <a href="https://wa.me/56986747101" target="_blank">Soporte ahora</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Soluciones informáticas reales. <span class="hero-highlight">Sin excusas, sin rodeos.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Ingeniero en informática especializado en infraestructura tecnológica, redes empresariales y correo corporativo. Implemento entornos seguros, estables y de alto rendimiento, asegurando continuidad operativa y soporte técnico integral. 
+          <br><br>
+          Nuestro enfoque combina precisión técnica, eficiencia y compromiso, entregando soluciones confiables que optimizan el funcionamiento de cada organización.
+        </p>
+        <br><br>
+        <div class="hero-buttons">
+          <a href="https://wa.me/56986747101" target="_blank" class="primary-btn">
+            <i class="fas fa-bolt"></i>
+            <span>Necesito soporte ahora</span>
+          </a>
+          <a href="#servicios" class="secondary-btn">Ver servicios</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%); border-radius: 1rem; padding: 2rem; border: 1px solid rgba(55, 65, 81, 0.3);">
+          <div style="text-align: center;">
+            <div style="width: 128px; height: 128px; margin: 0 auto 1.5rem; background: rgba(37, 99, 235, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <img src="Logo_AB.png" alt="Logo AB" style="width: 150px; height: 150px; object-fit: contain;">
+              </div>              
+            <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Visión. Fuerza. Precisión.</h3>
+            <p style="color: var(--gray-400);">
+                Comprometido con la excelencia, actúo con estrategia, enfoque y solvencia técnica.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="servicios" class="section section-bg">
+    <h2 class="section-title">Servicios Profesionales</h2>
+    <p class="section-subtitle">
+      Soluciones técnicas integrales diseñadas para garantizar la continuidad operacional y la seguridad de tu infraestructura.
+    </p>
+    
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-server"></i>
+        </div>
+        <h3 class="card-title">Infraestructura y Redes</h3>
+        <p class="card-text">
+          Instalación, configuración y optimización de redes LAN/WiFi, servidores, dominios Windows y Linux. Garantizamos conectividad estable y segura para tu operación diaria.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Redes empresariales</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Servidores locales/cloud</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Dominios activos</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Seguridad perimetral</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h3 class="card-title">Correo y Comunicaciones</h3>
+        <p class="card-text">
+          Migraciones, implementación de Carbonio CE, VPN seguras y gestión DNS. Comunicaciones empresariales sin interrupciones.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Migraciones correo</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Carbonio CE</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> VPN seguras</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Gestión DNS</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3 class="card-title">Soporte Técnico Integral</h3>
+        <p class="card-text">
+          Mantenimiento proactivo, recuperación de datos, respaldos automatizados y control remoto. Soporte cuando más lo necesitas.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Mantenimiento preventivo</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Recuperación datos</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Respaldos</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Soporte remoto 24/7</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <h3 class="card-title">Soluciones a Medida</h3>
+        <p class="card-text">
+          Desarrollo e integración tecnológica para notarías, estudios jurídicos y oficinas profesionales. Soluciones que se adaptan a tu flujo de trabajo.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Sistemas legales</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Integración ERP</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Automatización</li>
+          <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> Consultoría TI</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="proyectos" class="section">
+    <h2 class="section-title">Proyectos Realizados</h2>
+    <p class="section-subtitle">
+      Proyectos que demuestran mi enfoque práctico y resultados concretos para clientes exigentes.
+    </p>
+
+    <div class="grid-1">
+      <div class="project-card">
+        <div class="project-header">
+          <h3 class="project-title">Implementación tecnológica integral</h3>
+          <span class="project-client">Clinica San Lucas</span>
+        </div>
+      
+        <p class="card-text">
+          
+          <strong>Infraestructura:</strong><br> Diseño e implementación de red segura con servidores locales, respaldo en la nube y sistemas de comunicación cifrados, optimizando la conectividad y el rendimiento interno.<br><br>
+      
+          <strong>Soporte técnico:</strong><br> Implementación de herramientas avanzadas de diagnóstico y mantenimiento proactivo, asegurando estabilidad, seguridad y tiempos de respuesta optimizados en toda la infraestructura tecnológica.
+        </p>
+      
+        <div class="project-result">
+          Resultados:<br> 
+          - Operación continua garantizada, reducción de incidentes críticos y ahorro significativo en costos de licenciamiento anual.<br>
+          - Mejora del 80% en tiempos de respuesta y seguridad certificada para manejo de información sensible.<br>
+          - Reducción del 75% en incidentes críticos y tiempos de resolución 3x más rápidos.
+        </div>
+      </div>
+    
+    <div class="grid-1">
+      <div class="project-card">
+        <div class="project-header">
+          <h3 class="project-title">Implementación tecnológica integral</h3>
+          <span class="project-client">Notaría Camilla</span>
+        </div>
+      
+        <p class="card-text">
+          <strong>Migración de correo:</strong><br>Implementación de Carbonio CE para reemplazar Gmail, con migración completa de usuarios sin interrupción del servicio. Respaldos automáticos y reforzamiento de la seguridad para garantizar confidencialidad y disponibilidad continua.<br><br>
+      
+          <strong>Infraestructura:</strong><br> Diseño e implementación de red segura con servidores locales, respaldo en la nube y sistemas de comunicación cifrados, optimizando la conectividad y el rendimiento interno.<br><br>
+      
+          <strong>Soporte técnico:</strong><br> Implementación de herramientas avanzadas de diagnóstico y mantenimiento proactivo, asegurando estabilidad, seguridad y tiempos de respuesta optimizados en toda la infraestructura tecnológica.
+        </p>
+      
+        <div class="project-result">
+          Resultados:<br> 
+          - Operación continua garantizada, reducción de incidentes críticos y ahorro significativo en costos de licenciamiento anual.<br>
+          - Mejora del 80% en tiempos de respuesta y seguridad certificada para manejo de información sensible.<br>
+          - Reducción del 75% en incidentes críticos y tiempos de resolución 3x más rápidos.
+        </div>
+      </div>
+      
+
+    <div class="grid-1">
+      <div class="project-card">
+        <div class="project-header">
+          <h3 class="project-title">Implementación tecnológica integral</h3>
+          <span class="project-client">Tienda SN Schmith</span>
+        </div>
+      
+        <p class="card-text">
+          <strong>Infraestructura:</strong><br> Diseño e implementación completa de la red local, creación de topología estructurada con segmentación lógica, puntos de acceso estratégicamente distribuidos y configuración de red segura. Instalación y puesta en marcha de equipos de escritorio optimizados para el entorno de trabajo.<br><br>
+          
+          <strong>Soporte técnico:</strong><br> Configuración de estaciones de trabajo, instalación de software operativo y herramientas de productividad. Mantenimiento preventivo y correctivo, diagnóstico remoto y capacitación a usuarios para asegurar una operación continua y eficiente.<br><br>
+          
+          <strong>Soporte de correos:</strong><br> Configuración de cuentas corporativas con dominios personalizados, sincronización segura en dispositivos de escritorio y móviles, respaldos automáticos y monitoreo de integridad del servicio.
+        </p>
+      
+        <div class="project-result">
+          Resultados:<br> 
+          - Infraestructura sólida, conectividad estable y gestión tecnológica centralizada que optimiza los procesos internos y garantiza continuidad operativa.<br>
+          - Configuración y puesta a punto de estaciones de trabajo, instalación de software operativo y herramientas de productividad.<br>
+          - Migración integral de usuarios activos, garantizando continuidad operativa sin interrupciones.<br> 
+          - Implementación completa con respaldos automáticos y refuerzo de la seguridad de la plataforma, asegurando un entorno confiable y eficiente.
+        </div>
+      </div>
+
+
+  </section>
+
+  <!-- About Section -->
+  <section id="sobre-mi" class="section section-bg">
+    <div class="hero-content">
+      <div style="text-align: center;">
+        <div style="width: 192px; height: 192px; margin: 0 auto 2rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(37, 99, 235, 0.2);">
+            <div style="width: 160px; height: 160px; background: var(--gray-700); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <img src="yo.jpg" alt="Logo AB" style="width: 320px; height: 320px; object-fit: contain; border-radius: 25%;">
+              </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Sobre mí</h2>
+        <p style="font-size: 1.25rem; color: var(--gray-300); margin-bottom: 1.5rem;">
+            Soy Jorge Calquín, ingeniero en informática especializado en infraestructura, redes, correo empresarial y soporte técnico integral.<br><br>
+            Mi enfoque se centra en resolver problemas complejos con rapidez, precisión y eficiencia, siempre garantizando la continuidad operacional y la seguridad de los sistemas de mis clientes.
+<br>
+<br>
+            A lo largo de mi trayectoria, he implementado soluciones para notarías, estudios jurídicos y corporaciones, desde migraciones de correo masivas hasta redes seguras y respaldos automatizados. Mi trabajo combina estrategia técnica y ejecución efectiva, asegurando que cada proyecto funcione hoy y esté preparado para el futuro.
+        </p>
+        <div style="background: rgba(17, 24, 39, 0.6); border: 1px solid rgba(55, 65, 81, 0.3); border-radius: 0.75rem; padding: 1.5rem;">
+          <p style="font-style: italic; color: var(--gray-300);">
+            "Abordo cada desafío con visión estratégica, enfoque resolutivo y precisión en la ejecución. No me limito a resolver problemas: diseño e implemento infraestructuras sólidas que impulsan la continuidad y el crecimiento de cada proyecto."
+          </p>
+          <br>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contacto" class="section">
+    <h2 class="section-title">Contactanos</h2>
+    <p class="section-subtitle">
+      ¿Necesitas asistencia técnica inmediata o quieres discutir un proyecto? Estamos aquí para ayudarte.
+    </p>
+    
+    <div class="grid-2">
+      <div class="card" style="padding: 2rem;">
+        <h3 class="card-title" style="margin-bottom: 1.5rem;">Información de contacto</h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 48px; height: 48px; background: rgba(37, 99, 235, 0.2); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-envelope" style="color: var(--blue-400); font-size: 1.25rem;"></i>
+            </div>
+            <div>
+              <p style="color: var(--gray-400); font-size: 0.875rem;">Email</p>
+              <p style="font-weight: 600;">jcalquin@abproveedoresi.cl</p>
+              <p style="font-weight: 600;">ab.proveedoresi@gmail.com</p>
+            </div>
+          </div>
+          
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 48px; height: 48px; background: rgba(34, 197, 94, 0.2); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-phone" style="color: var(--green-400); font-size: 1.25rem;"></i>
+            </div>
+            <div>
+              <p style="color: var(--gray-400); font-size: 0.875rem;">Teléfono</p>
+              <p style="font-weight: 600;">+569 8674 7101</p>
+            </div>
+          </div>
+          
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 48px; height: 48px; background: rgba(6, 182, 212, 0.2); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-map-marker-alt" style="color: var(--cyan-400); font-size: 1.25rem;"></i>
+            </div>
+            <div>
+              <p style="color: var(--gray-400); font-size: 0.875rem;">Ubicación</p>
+              <p style="font-weight: 600;">Buin, Santiago, Chile</p>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(55, 65, 81, 0.3);">
+          <a href="https://wa.me/56986747101" target="_blank" class="submit-btn" style="background: linear-gradient(to right, var(--green-600), var(--green-500));">
+            <i class="fab fa-whatsapp"></i>
+            <span>Soporte Técnico Inmediato via WhatsApp</span>
+          </a>
+        </div>
+      </div>
+      
+      <div class="card" style="padding: 2rem;">
+        <h3 class="card-title" style="margin-bottom: 1.5rem;">Envía un mensaje</h3>
+        
+        <div id="formSuccess" class="success-message hidden">
+          <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">¡Mensaje enviado!</h4>
+          <p style="color: var(--gray-300);">Gracias por contactarme. Responderé lo antes posible.</p>
+        </div>
+        
+        <form id="contactForm" class="hidden">
+          <div class="form-group">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" id="name" name="name" required class="form-input" placeholder="Tu nombre">
+          </div>
+          
+          <div class="form-group">
+            <label for="company" class="form-label">Empresa</label>
+            <input type="text" id="company" name="company" class="form-input" placeholder="Nombre de tu empresa (opcional)">
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" required class="form-input" placeholder="tu@email.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="message" class="form-label">Mensaje</label>
+            <textarea id="message" name="message" required class="form-textarea" placeholder="Describe tu necesidad o problema técnico..."></textarea>
+          </div>
+          
+          <div style="background: rgba(31, 41, 55, 0.3); padding: 1rem; border-radius: 0.5rem; font-size: 0.75rem; color: var(--gray-400);">
+            <p>🔒 Tus datos están protegidos. No comparto información con terceros.</p>
+          </div>
+          
+          <button type="submit" id="submitBtn" class="submit-btn">
+            <i class="fas fa-paper-plane"></i>
+            <span>Enviar mensaje</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Planes de Soporte -->
+  <section id="planes" class="section section-bg">
+<section class="section" style="padding: 5rem 1rem; background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Planes de Soporte Técnico</h2>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Soluciones flexibles según tus necesidades: desde una intervención puntual hasta gestión integral de tu infraestructura.
+      </p>
+    </div>
+    <br>
+    <br>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+      
+      <!-- Plan A Demanda -->
+      <div class="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 text-center hover:border-blue-500/50 transition-all">
+        <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; background: rgba(37, 99, 235, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-bolt" style="font-size: 2rem; color: var(--blue-400);"></i>
+        </div>
+        <h4 class="text-lg font-bold text-gray-400 uppercase tracking-wider mb-2">A DEMANDA</h4>
+        <h3 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--white);">1 UF</h3>
+        <p class="text-gray-400 mb-6 text-sm">Para clientes que necesitan solo una atención puntual y para un tema específico.</p>
+        <br>
+        <ul style="text-align: left; margin-bottom: 2rem; color: var(--gray-300);">
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Soporte presencial
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Soporte remoto
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Sistemas Operativos (Win/Linux)
+          </li>
+          <li style="margin-bottom: 0.75rem; color: var(--gray-500); display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-times-circle" style="color: var(--gray-600); margin-top: 0.25rem;"></i>
+            Hospedaje de correos
+          </li>
+          <li style="margin-bottom: 0.75rem; color: var(--gray-500); display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-times-circle" style="color: var(--gray-600); margin-top: 0.25rem;"></i>
+            Creación / admin. web
+          </li>
+        </ul>
+        <a href="https://wa.me/56986747101" target="_blank" 
+           class="block w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-all"
+           style="text-decoration: none; text-align: center;">
+          QUIERO SABER MÁS
+        </a>
+      </div>
+
+      <!-- Plan Básico -->
+      <div class="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 text-center hover:border-blue-500/50 transition-all">
+        <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; background: rgba(6, 182, 212, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--cyan-400);"></i>
+        </div>
+        <h4 class="text-lg font-bold text-gray-400 uppercase tracking-wider mb-2">BÁSICO</h4>
+        <h3 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--white);">9 UF</h3>
+        <p class="text-gray-400 mb-6 text-sm">Soporte informático completo: análisis, mejoras y reportes mensuales.</p>
+        <br>
+        <ul style="text-align: left; margin-bottom: 2rem; color: var(--gray-300);">
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Soporte presencial
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Soporte remoto 24/7
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Gestión de dominios (Zentyal, Windows Server)
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Migraciones de correo (Carbonio CE, Gmail)
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Respaldo automatizado
+          </li>
+        </ul>
+        <a href="https://wa.me/56986747101" target="_blank" 
+           class="block w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-all"
+           style="text-decoration: none; text-align: center;">
+          QUIERO SABER MÁS
+        </a>
+      </div>
+
+      <!-- Plan Premium -->
+      <div class="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 text-center hover:border-blue-500/50 transition-all">
+        <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; background: rgba(34, 197, 94, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-crown" style="font-size: 2rem; color: var(--green-400);"></i>
+        </div>
+        <h4 class="text-lg font-bold text-gray-400 uppercase tracking-wider mb-2">PREMIUM</h4>
+        <h3 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--white);">14 UF</h3>
+        <p class="text-gray-400 mb-6 text-sm">Pack completo para empresas: infraestructura, redes, correo y soporte continuo.</p>
+        <br>
+        <ul style="text-align: left; margin-bottom: 2rem; color: var(--gray-300);">
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Todo lo del plan Básico
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Infraestructura de red (LAN/WiFi empresarial)
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Servidor de respaldo local
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Monitoreo proactivo
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <i class="fas fa-check-circle" style="color: var(--green-400); margin-top: 0.25rem;"></i>
+            Gestión de usuarios y permisos
+          </li>
+        </ul>
+        <a href="https://wa.me/56986747101" target="_blank" 
+           class="block w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-all"
+           style="text-decoration: none; text-align: center;">
+          QUIERO SABER MÁS
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <div style="width: 32px; height: 32px; background: var(--blue-600); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <img src="Logo_AB.png" alt="Logo AB" style="width: 34px; height: 34px; object-fit: cover;">
+          </div>          
+        <span>A&B Proveedores - Servicios Integrales SpA</span>
+      </div>
+      <div class="footer-text">
+        <p>© <span id="year"></span> Jorge Calquín. Todos los derechos reservados.</p>
+        <p>Ingeniero en Informática - Soluciones Tecnológicas Profesionales</p>
+      </div>
+      <a href="https://wa.me/56986747101" target="_blank" class="footer-contact">
+        <i class="fas fa-phone"></i>
+        <span>Soporte 24/7</span>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (mobileMenu.classList.contains('hidden')) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      } else {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      }
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      });
+    });
+    
+    // Form handling
+    const contactForm = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+    
+    // Show form initially
+    contactForm.classList.remove('hidden');
+    
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<div class="animate-spin" style="width: 1.25rem; height: 1.25rem; border: 2px solid white; border-top: 2px solid transparent; border-radius: 50%;"></div> <span>Enviando...</span>';
+      
+      // Simulate form submission
+      setTimeout(() => {
+        contactForm.classList.add('hidden');
+        formSuccess.classList.remove('hidden');
+        
+        // Reset form
+        this.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span>Enviar mensaje</span>';
+        
+        // Hide success after 5 seconds
+        setTimeout(() => {
+          formSuccess.classList.add('hidden');
+          contactForm.classList.remove('hidden');
+        }, 5000);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
+
